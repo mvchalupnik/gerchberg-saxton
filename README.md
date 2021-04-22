@@ -1,6 +1,6 @@
 # Simple MATLAB implementation of Gerchberg-Saxton Algorithm
 
-The Gerchberg-Saxton algorithm is an iterative phase-finding algorithm that can be used to find complex phases when one only has access to the amplitudes of an image and the amplitude of its Fourier transform. Specifically, it can find the complex phases to apply to the amplitude of a source image in order to generate a given desired target pattern when the image is Fourier transformed, despite beginning with no initial phase knowledge. One application for this is recovering phase information from a nearfield image (source) given images in the nearfield and farfield (target). 
+The Gerchberg-Saxton algorithm is an iterative phase-finding algorithm that can be used to find complex phases when one only has access to the amplitudes of an image and the amplitude of its Fourier transform. Specifically, it can find the complex phases to apply to the amplitude of a source image in order to generate a given desired target pattern when the image is Fourier transformed, despite beginning with no initial phase knowledge. One application for this is recovering phase information from a nearfield image (source) given images in the nearfield (source) and farfield (target). 
 
 Due to redundancies in the way phase can be applied to a source image produce a given target image, the phase map produced at the end will not necessarily be the phase of the original source image; however it will be a phase map that, when applied to the source image, approximates the correct target image, such that the Fourier transform of that target image matches the source image up to some specified error. 
 
@@ -17,19 +17,19 @@ finds the associated target image by Fourier transform,
 
 then throws away the "secret" complex phase of the source image
 
-![](imgs/src_angle.png). 
+![](imgs/src_angle.png) 
 
-The Gerchberg-Saxton algorithm then commences, first, finding $A = ifft(abs(src))$
+The Gerchberg-Saxton algorithm then commences, first, finding ![\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}](https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}) $A = ifft(abs(src))$
 
-![](imgs/A_iter1.png),
+![](imgs/A_iter1.png)
 
 then finding $B = abs(src)/cdot e^{i arg(A)}$
 
-![](imgs/B_iter1.png), 
+![](imgs/B_iter1.png)
 
 then $C = fft(B)$
 
-![](imgs/C_iter1.png),
+![](imgs/C_iter1.png)
 
 then $D = abs(trg) /cdot e^{i arg(C)}$
 

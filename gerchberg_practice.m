@@ -1,5 +1,5 @@
 % Practicing Gerchberg-Saxton algorithm for determining phases from
-% phase-less, intensity-only "nearfield" and "farfield" images
+% phase-less, intensity-only "nearfield" or source and "farfield" or target images
 
 fileloc = 'gs-practice2';
 
@@ -7,6 +7,7 @@ if ~exist(fileloc, 'dir')
    mkdir(fileloc) 
 end
 
+save_iteration_imgs = false;
 
 % First, generate our nearfield image using Matlab's built-in peaks
 % function. Also, multiply by some complex phases ts
@@ -33,14 +34,14 @@ src = src.*ts;
 % Save the amplitude of the target
 trg_abs = abs(fft2(src));
 trg_abs = abs(trg_abs)/max(max(abs(trg_abs)));
-save_imgs(trg_abs, [fileloc, '/trg_abs_ff'], 'Abs(farfield)');
+save_imgs(trg_abs, [fileloc, '/trg_abs_ff'], 'Abs(target)');
 
 %Save phase map of source, to compare at the end
-save_imgs(angle(src), [fileloc, '/src_angle'], 'Arg(nearfield)', 'jet')
+save_imgs(angle(src), [fileloc, '/src_angle'], 'Arg(source)', 'jet')
 
 % Save amplitude of src
 src_abs = abs(src)/max(max(abs(src)));
-save_imgs(src_abs, [fileloc, '/src_abs_nf'], 'Abs(nearfield)');
+save_imgs(src_abs, [fileloc, '/src_abs_nf'], 'Abs(source)');
 
 
 %% Gerchberg-Saxton algorithm, following: 
@@ -54,30 +55,43 @@ save_imgs(A, [fileloc, '/A_iter', num2str(1)],['A iter. ', num2str(1)]);
 save_imgs(angle(A), [fileloc, '/src_angle_1'], ...
     ['Arg(nearfield) iter. ', num2str(1)], 'jet');
 
-
-for k=1:1
-%while sum(sum(abs(A - src))) > 1e4
+prev_abs = abs(A)+100;
+k = 1;
+while sum(sum(abs(abs(A) - prev_abs))) > 1e-3
+    prev_abs = abs(A);
+    
     B = abs(src_abs).*exp(i*angle(A));
-    save_imgs(B, [fileloc, '/B_iter', num2str(k)], ['B iter. ', num2str(k)]);
-    
+
     C = fft2(B);
-    save_imgs(C, [fileloc, '/C_iter', num2str(k)],['C iter. ', num2str(k)]);
-    
+        
     D = abs(trg_abs).*exp(i*angle(C));
-    save_imgs(D, [fileloc, '/D_iter', num2str(k)],['D iter. ', num2str(k)]);
     
     A = ifft2(D);
-    save_imgs(A, [fileloc, '/A_iter', num2str(k+1)],['A iter. ', num2str(k+1)]);
     
-    %Save phase map at step k
-    save_imgs(angle(A), [fileloc, '/src_angle_', num2str(k+1)],...
-        ['Arg(nearfield) iter. ', num2str(k+1)], 'jet');
+    if save_iteration_imgs
+        save_imgs(B, [fileloc, '/B_iter', num2str(k)], ['B iter. ', num2str(k)]);
+        save_imgs(C, [fileloc, '/C_iter', num2str(k)],['C iter. ', num2str(k)]);
+        save_imgs(D, [fileloc, '/D_iter', num2str(k)],['D iter. ', num2str(k)]);
+        save_imgs(A, [fileloc, '/A_iter', num2str(k+1)],['A iter. ', num2str(k+1)]);
+        
+        %Save phase map at step k
+        save_imgs(angle(A), [fileloc, '/src_angle_', num2str(k+1)],...
+            ['Arg(A) iter. ', num2str(k+1)], 'jet');
+    end
+    
 
-    
+    k=k+1;
 end
 
-%Save phase map of source
-save_imgs(angle(A), [fileloc, '/src_angle_recon'], 'Reconstructed Arg(nearfield)')
+%Save C at step k
+save_imgs(C, [fileloc, '/C_iter', num2str(k-1)],['C iter. ', num2str(k-1)]);
+
+%save A at step k
+save_imgs(A, [fileloc, '/A_iter', num2str(k)],['A iter. ', num2str(k)]);
+
+%Save phase map at step k
+save_imgs(angle(A), [fileloc, '/src_angle_', num2str(k)],...
+    ['Arg(A) iter. ', num2str(k)], 'jet');
 
 
 

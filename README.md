@@ -39,7 +39,23 @@ and then taking A = ifft(D) and repeating each step, until the difference betwee
 
 abs(A) will begin to look more and more like the source image
 
-![]
+<div class="row">
+  <div class="column">
+    <img src="imgs/C_iter1.png" width = "300">
+    <img src="imgs/C_iter1.png" width = "300">
+    <img src="imgs/C_iter1.png" width = "300">
+  </div>
+  <div class="column">
+    <img src="imgs/C_iter1.png" width = "300">
+    <img src="imgs/C_iter1.png" width = "300">
+    <img src="imgs/C_iter1.png" width = "300">
+  </div>
+  <div class="column">
+    <img src="imgs/C_iter1.png" width = "300">
+    <img src="imgs/C_iter1.png" width = "300">
+    <img src="imgs/C_iter1.png" width = "300">
+  </div>
+</div>
 
 abs(C) will begin to look more and more like the target image
 

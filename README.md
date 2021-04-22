@@ -41,26 +41,58 @@ abs(A) will begin to look more and more like the source image
 
 <div class="row">
   <div class="column">
-    <img src="imgs/C_iter1.png" width = "300">
-    <img src="imgs/C_iter1.png" width = "300">
-    <img src="imgs/C_iter1.png" width = "300">
+    <img src="imgs/A_iter1.png" width = "300">
+    <img src="imgs/A_iter2.png" width = "300">
+    <img src="imgs/A_iter3.png" width = "300">
   </div>
   <div class="column">
-    <img src="imgs/C_iter1.png" width = "300">
-    <img src="imgs/C_iter1.png" width = "300">
-    <img src="imgs/C_iter1.png" width = "300">
+    <img src="imgs/A_iter4.png" width = "300">
+    <img src="imgs/A_iter5.png" width = "300">
+    <img src="imgs/A_iter6.png" width = "300">
   </div>
   <div class="column">
-    <img src="imgs/C_iter1.png" width = "300">
-    <img src="imgs/C_iter1.png" width = "300">
-    <img src="imgs/C_iter1.png" width = "300">
+    <img src="imgs/A_iter90.png" width = "300">
+    <img src="imgs/A_iter398.png" width = "300">
+    <img src="imgs/A_iter2171.png" width = "300">
   </div>
 </div>
 
 abs(C) will begin to look more and more like the target image
 
-![]
+<div class="row">
+  <div class="column">
+    <img src="imgs/C_iter1.png" width = "300">
+    <img src="imgs/C_iter2.png" width = "300">
+    <img src="imgs/C_iter3.png" width = "300">
+  </div>
+  <div class="column">
+    <img src="imgs/C_iter4.png" width = "300">
+    <img src="imgs/C_iter5.png" width = "300">
+    <img src="imgs/C_iter6.png" width = "300">
+  </div>
+  <div class="column">
+    <img src="imgs/C_iter89.png" width = "300">
+    <img src="imgs/C_iter397.png" width = "300">
+    <img src="imgs/C_iter2170.png" width = "300">
+  </div>
+</div>
 
 and the phase will converge to some phase map resembling (though not exactly matching, due to degeneracies in phase) the "secret" phase map
 
-![].
+<div class="row">
+  <div class="column">
+    <img src="imgs/src_angle_1.png" width = "300">
+    <img src="imgs/src_angle_2.png" width = "300">
+    <img src="imgs/src_angle_3.png" width = "300">
+  </div>
+  <div class="column">
+    <img src="imgs/src_angle_4.png" width = "300">
+    <img src="imgs/src_angle_5.png" width = "300">
+    <img src="imgs/src_angle_6.png" width = "300">
+  </div>
+  <div class="column">
+    <img src="imgs/src_angle_90.png" width = "300">
+    <img src="imgs/src_angle_398.png" width = "300">
+    <img src="imgs/src_angle_2171.png" width = "300">
+  </div>
+</div>

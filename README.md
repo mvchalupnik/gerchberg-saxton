@@ -30,7 +30,7 @@ then, ![](https://latex.codecogs.com/svg.latex?&space;C=\text{fft}(B)).
 
 <img src="imgs/C_iter1.png" width = "300">
 
-then, ![](https://latex.codecogs.com/svg.latex?\Large&space;D=\text{abs}(\text{trg})\cdot%20e^{i%20arg(C)}) 
+then, ![](https://latex.codecogs.com/svg.latex?&space;D=\text{abs}(\text{trg})\cdot%20e^{i%20\text{arg}(C)}) 
 
 <img src="imgs/D_iter1.png" width = "300">
 

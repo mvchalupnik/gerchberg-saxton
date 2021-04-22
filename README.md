@@ -19,19 +19,19 @@ then throws away the "secret" complex phase of the source image
 
 ![](imgs/src_angle.png) 
 
-The Gerchberg-Saxton algorithm then commences, first, finding ![\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}](https://latex.codecogs.com/svg.latex?\Large&space;A=\text{ifft}(\text{abs}(\text{src})))
+The Gerchberg-Saxton algorithm then commences, first, finding ![\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}](https://latex.codecogs.com/svg.latex?&space;A=\text{ifft}(\text{abs}(\text{src})))
 
 ![](imgs/A_iter1.png)
 
-then finding ![\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}](https://latex.codecogs.com/svg.latex?\Large&space;B=\text{abs}(\text{src})/cdot%20e^{i%20\text{arg}(A)}) 
+then finding ![](https://latex.codecogs.com/svg.latex?B=\text{abs}(\text{src})\cdot%20e^{i%20\text{arg}(A)}) 
 
 ![](imgs/B_iter1.png)
 
-then ![](https://latex.codecogs.com/svg.latex?&space;C=\text{fft}(B)) $C = fft(B)$
+then ![](https://latex.codecogs.com/svg.latex?&space;C=\text{fft}(B)).
 
 ![](imgs/C_iter1.png)
 
-then ![\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}](https://latex.codecogs.com/svg.latex?\Large&space;D=\text{abs}(\text{trg})\cdot%20e^{i%20arg(C)}) 
+then ![](https://latex.codecogs.com/svg.latex?\Large&space;D=\text{abs}(\text{trg})\cdot%20e^{i%20arg(C)}) 
 
 ![](imgs/D_iter1.png)
 

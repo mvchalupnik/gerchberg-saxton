@@ -57,7 +57,7 @@ save_imgs(angle(A), [fileloc, '/src_angle_1'], ...
 
 prev_abs = abs(A)+100;
 k = 1;
-while sum(sum(abs(abs(A) - prev_abs))) > 1e-7
+while sum(sum(abs(abs(A) - prev_abs))) > 1e-2
     prev_abs = abs(A);
     
     B = abs(src_abs).*exp(i*angle(A));
@@ -103,7 +103,7 @@ function [] = save_imgs(data, savepath, ttl, cmap)
         colormap(hdl, cmap);
         c = colorbar;
         c.FontSize = 20;
-        imagesc(data);
+        imagesc(data, [-pi, pi]);
         c.XLim = [-pi, pi];
         c.YLim = [-pi, pi];
     else

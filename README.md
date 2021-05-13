@@ -100,8 +100,8 @@ and the phase will converge to some phase map resembling (though not necessarily
 Why doesn't the phase necessarily exactly match the original "secret" phase? First, we began with a source image that had many symmetries in the amplitude. A source symmetric in amplitude (even if not symmetric in phase) will have degeneracies in the amplitude (though not phase!) of its Fourier transform. Because we're only starting with two amplitudes, (amplitude of target and amplitude of source), we cannot resolve the degeneracies. Because of these symmetries, our phase map will thus change when the random number generator for the initial random phase is seeded differently. Below is an example of the phase map produced when the random number generator is seeded with 1 (middle) and when the random number generator is seeded with 2 (on right), compared to the secret phase (on left).
 <div class="row">
     <img src="imgs/src_angle.png" width = "280">
-    <img src="imgs/src_angle_2588.png" width = "280">
-    <img src="imgs/src_angle_3361_rng2.png" width = "280">
+    <img src="imgs/src_angle_3361.png" width = "280">
+    <img src="imgs/src_angle_3930_rng2.png" width = "280">
 </div>
 
   
@@ -109,6 +109,6 @@ Second, there is always an overall freedom in global phase. One can use the wrap
 <div class="row">
     <img src="imgs/src_angle.png" width = "300">
     <img src="imgs/src_angle_2588.png" width = "300">
-    <img src="imgs/src_angle_pluspi2588_.png" width = "300">
+    <img src="imgs/src_angle_pluspi2588.png" width = "300">
 </div>
 

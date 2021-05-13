@@ -18,7 +18,7 @@ Lastly the "secret" complex phase of the source image is extracted, for comparis
 
 <img src="imgs/src_angle.png" width = "300">
 
-The Gerchberg-Saxton algorithm then begins, in an attempt to retrieve the "secret" phase map. First, ![\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}](https://latex.codecogs.com/svg.latex?&space;A=\text{abs}(\text{src})\cdot%20e^{i&space;\text{rand}(\phi)}) is calculated, where ![](https://latex.codecogs.com/svg.latex?&space;\text{rand}(\phi))  is an array of random phases:
+The Gerchberg-Saxton algorithm then begins, in an attempt to retrieve the "secret" phase map. First, ![\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}](https://latex.codecogs.com/svg.latex?&space;A=\text{abs}(e^{i&space;\text{rand}(\phi)}) is calculated, where ![](https://latex.codecogs.com/svg.latex?&space;\text{rand}(\phi))  is an array of random phases:
 
 <img src="imgs/A_iter1.png" width = "300">
 

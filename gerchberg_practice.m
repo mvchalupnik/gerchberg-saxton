@@ -1,13 +1,17 @@
 % Practicing Gerchberg-Saxton algorithm for determining phases from
 % phase-less, intensity-only "nearfield" or source and "farfield" or target images
+clear;
 
-fileloc = 'gs-practice3';
+%% Modify below
+fileloc = 'gs-practice-test2_rng2';
+save_iteration_imgs = false;
+%%%
 
 if ~exist(fileloc, 'dir')
    mkdir(fileloc) 
 end
 
-save_iteration_imgs = false;
+
 
 % First, generate our nearfield image using Matlab's built-in peaks
 % function. Also, multiply by some complex phases ts
@@ -47,8 +51,11 @@ save_imgs(src_abs, [fileloc, '/src_abs_nf'], 'Abs(source)');
 %% Gerchberg-Saxton algorithm, following: 
 % https://en.wikipedia.org/wiki/Gerchberg%E2%80%93Saxton_algorithm
 
-%Start by taking the inverse FT of our phase-less target image
-A = ifft2(trg_abs);
+%Start by taking abs(src) (what we measure) and multiplying by
+%a random phase
+rng(1); %seed the rng for reproducibility
+randphase = (rand(100,200)-0.5)*2*pi;
+A = exp(i*randphase);
 save_imgs(A, [fileloc, '/A_iter', num2str(1)],['A iter. ', num2str(1)]);
 
 %Save phase map at step 1
@@ -57,7 +64,7 @@ save_imgs(angle(A), [fileloc, '/src_angle_1'], ...
 
 prev_abs = abs(A)+100;
 k = 1;
-while sum(sum(abs(abs(A) - prev_abs))) > 1e-2
+while sum(sum(abs(abs(A) - prev_abs))) > 1e-7
     prev_abs = abs(A);
     
     B = abs(src_abs).*exp(i*angle(A));
@@ -93,6 +100,11 @@ save_imgs(A, [fileloc, '/A_iter', num2str(k)],['A iter. ', num2str(k)]);
 save_imgs(angle(A), [fileloc, '/src_angle_', num2str(k)],...
     ['Arg(A) (Radians) iter. ', num2str(k)], 'jet');
 
+%Try adding a constant phase to the phase map
+save_imgs(wrap_phase(angle(A), pi), [fileloc, '/src_angle_pluspi', num2str(k)],...
+    ['Arg(A) + \pi (Radians) iter. ', num2str(k)], 'jet');
+
+
 
 
 function [] = save_imgs(data, savepath, ttl, cmap)
@@ -104,8 +116,7 @@ function [] = save_imgs(data, savepath, ttl, cmap)
         c = colorbar;
         c.FontSize = 20;
         imagesc(data, [-pi, pi]);
-        c.XLim = [-pi, pi];
-        c.YLim = [-pi, pi];
+        c.Limits = [-pi, pi];
     else
          imagesc(abs(data)/max(max(abs(data))));
     end
@@ -128,3 +139,11 @@ function [] = save_imgs(data, savepath, ttl, cmap)
 end
 
 
+function arr = wrap_phase(dat, ph) 
+%Takes an array of phases between [-pi, pi] dat. Add or subtract some phase
+%ph to the entire array. Roll the phase for non-thresholded values (values
+%between [-pi and pi]. (thresholded values are saved as -100) 
+    mask = dat > -99;
+    arr = mod(dat + pi + ph, 2*pi) - pi;
+    arr = arr .* mask + ~mask.*-100;
+end

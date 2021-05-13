@@ -18,7 +18,7 @@ Lastly the "secret" complex phase of the source image is extracted, for comparis
 
 <img src="imgs/src_angle.png" width = "300">
 
-The Gerchberg-Saxton algorithm then begins, in an attempt to retrieve the "secret" phase map. First, ![\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}](https://latex.codecogs.com/svg.latex?&space;A=\text{ifft}(\text{abs}(\text{src}))) is calculated:
+The Gerchberg-Saxton algorithm then begins, in an attempt to retrieve the "secret" phase map. First, ![\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}](https://latex.codecogs.com/svg.latex?&space;A=\text{abs}(\text{src})\cdot%20e^{i&space;\text{rand}(\phi)}) is calculated, where ![](https://latex.codecogs.com/svg.latex?&space;\text{rand}(\phi))  is an array of random phases:
 
 <img src="imgs/A_iter1.png" width = "300">
 
@@ -50,9 +50,9 @@ abs(A) will begin to look more and more like the source image:
     <img src="imgs/A_iter6.png" width = "280">
   </div>
   <div class="column">
-    <img src="imgs/A_iter90.png" width = "280">
-    <img src="imgs/A_iter398.png" width = "280">
-    <img src="imgs/A_iter2171.png" width = "280">
+    <img src="imgs/A_iter144.png" width = "280">
+    <img src="imgs/A_iter741.png" width = "280">
+    <img src="imgs/A_iter3361.png" width = "280">
   </div>
 </div>
 
@@ -70,13 +70,13 @@ abs(C) will begin to look more and more like the target image:
     <img src="imgs/C_iter6.png" width = "280">
   </div>
   <div class="column">
-    <img src="imgs/C_iter89.png" width = "280">
-    <img src="imgs/C_iter397.png" width = "280">
-    <img src="imgs/C_iter2170.png" width = "280">
+    <img src="imgs/C_iter143.png" width = "280">
+    <img src="imgs/C_iter740.png" width = "280">
+    <img src="imgs/C_iter3360.png" width = "280">
   </div>
 </div>
 
-and the phase will converge to some phase map resembling (though not exactly matching, due to degeneracies in phase) the "secret" phase map:
+and the phase will converge to some phase map resembling (though not necessarily exactly matching) the "secret" phase map:
 
 <div class="row">
   <div class="column">
@@ -90,8 +90,25 @@ and the phase will converge to some phase map resembling (though not exactly mat
     <img src="imgs/src_angle_6.png" width = "280">
   </div>
   <div class="column">
-    <img src="imgs/src_angle_90.png" width = "280">
-    <img src="imgs/src_angle_398.png" width = "280">
-    <img src="imgs/src_angle_2171.png" width = "280">
+    <img src="imgs/src_angle_144.png" width = "280">
+    <img src="imgs/src_angle_741.png" width = "280">
+    <img src="imgs/src_angle_3361.png" width = "280">
   </div>
 </div>
+
+## Discussion
+Why doesn't the phase necessarily exactly match the original "secret" phase? First, we began with a source image that had many symmetries in the amplitude. A source symmetric in amplitude (even if not symmetric in phase) will have degeneracies in the amplitude (though not phase!) of its Fourier transform. Because we're only starting with two amplitudes, (amplitude of target and amplitude of source), we cannot resolve the degeneracies. Because of these symmetries, our phase map will thus change when the random number generator for the initial random phase is seeded differently. Below is an example of the phase map produced when the random number generator is seeded with 1 (middle) and when the random number generator is seeded with 2 (on right), compared to the secret phase (on left).
+<div class="row">
+    <img src="imgs/src_angle.png" width = "280">
+    <img src="imgs/src_angle_2588.png" width = "280">
+    <img src="imgs/src_angle_3361_rng2.png" width = "280">
+</div>
+
+  
+Second, there is always an overall freedom in global phase. One can use the wrap_phase function also defined in the script to experiment with this. Below is an example of the secret phase (on left), next to the phase found by the algorithm (middle) and the phase found by the algorithm, shifted by pi.  
+<div class="row">
+    <img src="imgs/src_angle.png" width = "300">
+    <img src="imgs/src_angle_2588.png" width = "300">
+    <img src="imgs/src_angle_pluspi2588_.png" width = "300">
+</div>
+
